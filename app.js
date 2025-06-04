@@ -37,6 +37,10 @@ app.use(cors({
   credentials: true               // ✅ allow cookies to be sent
 }));
 
+app.get('/ping', (req, res) => {
+  res.send('pong');
+});
+
 app.use('/',indexRoutes);
 app.use('/owner', ownerRoutes);
 app.use('/products', productRoutes);
