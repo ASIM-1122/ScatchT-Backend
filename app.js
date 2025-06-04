@@ -33,7 +33,7 @@ app.use(express.urlencoded({ extended: true, limit: '5mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(cors({
-  origin: "http://localhost:5173", // your frontend URL
+  origin: "*", // your frontend URL
   credentials: true               // ✅ allow cookies to be sent
 }));
 
