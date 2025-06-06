@@ -34,21 +34,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://scatch-t.netlify.app/"
+  "https://scatch-t.netlify.app"
 ];
 
 app.use(cors({
   origin: function (origin, callback) {
-    // allow requests with no origin (like mobile apps or curl)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
     } else {
-      return callback(new Error("Not allowed by CORS"));
+      callback(new Error("Not allowed by CORS"));
     }
   },
   credentials: true
 }));
+
 
 app.get('/ping', (req, res) => {
   res.send('pong');
