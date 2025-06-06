@@ -33,13 +33,11 @@ module.exports.registerUser = async (req, res) => {
         // Generate a token for the user
         const token = await generateToken(user); // generateToken() is a function to generate JWT tokens
         // Send the token in the response   
-       res.cookie('token', token, {
+        res.cookie('token', token, {
   httpOnly: true,
-  secure: true,             // ✅ Required for HTTPS
-  sameSite: 'None',         // ✅ Required for cross-origin (Netlify ↔ Railway)
-  maxAge: 1000 * 60 * 60 * 24 // Optional: 1 day
+  secure: false,
+  sameSite: 'Lax'
 });
-
         res.status(201).json({ message: 'User registered successfully', user,token});
 
     }catch (error) {
@@ -70,13 +68,11 @@ module.exports.loginUser = async (req, res) => {
        
         const token = await generateToken(user); // generateToken() is a function to generate JWT tokens
         // Send the token in the response   
-    res.cookie('token', token, {
+        res.cookie('token', token, {
   httpOnly: true,
-  secure: true,             // ✅ Required for HTTPS
-  sameSite: 'None',         // ✅ Required for cross-origin (Netlify ↔ Railway)
-  maxAge: 1000 * 60 * 60 * 24 // Optional: 1 day
+  secure: false,
+  sameSite: 'Lax'
 });
-
         res.status(200).json({ message: 'User logged in successfully', user,token });
 
 

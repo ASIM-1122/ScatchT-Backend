@@ -42,11 +42,9 @@ module.exports.registerOwner = async (req, res) => {
         // Set the token in the cookie
        res.cookie('token', token, {
   httpOnly: true,
-  secure: true,             // ✅ Required for HTTPS
-  sameSite: 'None',         // ✅ Required for cross-origin (Netlify ↔ Railway)
-  maxAge: 1000 * 60 * 60 * 24 // Optional: 1 day
+  secure: false,
+  sameSite: 'Lax'
 });
-
         return res.status(200).json({message: 'Owner created successfully', owner: Owner});
     
 
@@ -91,13 +89,11 @@ module.exports.ownerLogin = async (req, res) => {
             {expiresIn: '24h'}
         );
         // Set the token in the cookie
-   res.cookie('token', token, {
+      res.cookie('token', token, {
   httpOnly: true,
-  secure: true,             // ✅ Required for HTTPS
-  sameSite: 'None',         // ✅ Required for cross-origin (Netlify ↔ Railway)
-  maxAge: 1000 * 60 * 60 * 24 // Optional: 1 day
+  secure: false,
+  sameSite: 'Lax'
 });
-
       return res.status(200).json({
         message: 'Login successful',
         Owner,
